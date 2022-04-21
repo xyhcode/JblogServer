@@ -7,8 +7,10 @@ const {md5}=require('../utils/index')
 /* 注册接口 */
 router.post('/register', async (req, res, next)=>{
   //获取前台的数据
-  let {username, password,nickname,} = req.body;
-  console.log(username,password,nickname);
+  let {username, password,nickname,headimg} = req.body;
+  //为空就给默认的头像
+  headimg=headimg || 'https://gitee.com/xyhcodefilter/pic-go/raw/d514d8913c873b3c86329cb7d6f0cfbd18abab95/image/202204212057941.png'
+  console.log(username,password,nickname,headimg);
   //查询用户是否注册
   try {
     let user=await querysql('select * from user where username = ?',[username]);
@@ -17,12 +19,12 @@ router.post('/register', async (req, res, next)=>{
       //加密
       password=md5(`${password}${PWD_SALT}`);
       //添加用户
-      let regresult=await querysql('insert into user (username,password,nickname) values (?,?,?)',[username,password,nickname]);
+      let regresult=await querysql('insert into user (username,password,nickname,headimg) values (?,?,?,?)',[username,password,nickname,headimg]);
       //查询添加后的用户信息
       let userinfo=await querysql('select * from user where id=?',[regresult.insertId]);
       //返回信息
       res.send({
-        code: 200,
+        code: 201,
         msg:'注册成功！',
         data:userinfo
       })

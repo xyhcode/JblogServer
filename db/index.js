@@ -4,7 +4,7 @@ const dboptions= require('./config')
 //创建连接池
 const pool=mysql.createPool(dboptions);
 
-//查询方法
+//封装方法
 function query(sql,params){
     return new Promise((resolve,reject) => {
         pool.getConnection((err,conn)=>{

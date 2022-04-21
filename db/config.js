@@ -1,10 +1,10 @@
 let dbOption
 dbOption = {
     connectionLimit: 10,
-    host: 'localhost',
-    user: 'root',
-    password: 'root',
-    port: '3306',
-    database: 'blogserver'
+    host: 'localhost',//地址
+    user: 'root',//用户名
+    password: 'root',//密码
+    port: '3306',//端口
+    database: 'blogserver'//数据库
 }
 module.exports = dbOption
