@@ -1,4 +1,8 @@
 module.exports={
-    //秘钥
-    PWD_SALT: 'SERVEBLOG'
+    //秘钥md5
+    PWD_SALT: 'SERVEBLOG',
+    //token秘钥
+    PRIVATE_KEY: 'xianxian',
+    //token过期时间 一天
+    EXPIRED:60*60*24
 }
