@@ -110,6 +110,7 @@ router.get('/info',async (req, res, next)=>{
     let usinfo=await querysql('select * from user where id =?',[usid]);
     res.send({
       code:200,
+      msg:'用户信息获取成功！',
       data:usinfo[0]
     });
     //console.log(usinfo);
