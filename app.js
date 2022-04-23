@@ -33,7 +33,8 @@ app.use(expressJWT({
 }).unless({
   path:[
       '/api/users/register',//白名单 除了这里的地址 其他URL都要验证
-      '/api/users/login'
+      '/api/users/login',
+      '/api/users/uploads'
   ]
 }))
 

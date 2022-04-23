@@ -1,9 +1,10 @@
 var express = require('express');
 var router = express.Router();
 const querysql=require('../db/index')
-const {PWD_SALT,PRIVATE_KEY,EXPIRED}=require('../utils/constant')
-const {md5}=require('../utils/index')
+const {PWD_SALT,PRIVATE_KEY,EXPIRED,IP}=require('../utils/constant')
+const {md5,upload}=require('../utils/index')
 const jwt=require('jsonwebtoken')
+
 
 /**
  * 注册
@@ -116,6 +117,22 @@ router.get('/info',async (req, res, next)=>{
   }catch (e) {
     next(e);
   }
+});
+
+/**
+ * 头像上传
+ */
+router.post('/uploads',upload.single('headimg'),async (req, res, next)=>{
+  console.log(req.file);
+  //切割路径
+  let imgpath=req.file.path.split('public')[1];
+  //拼接返回的地址
+  let imgurl=`http://${IP}:3000${imgpath}`;
+  res.send({
+    code:201,
+    msg:'上传成功！',
+    data:imgurl
+  })
 })
 
 module.exports = router;
