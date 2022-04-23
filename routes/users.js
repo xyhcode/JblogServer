@@ -25,7 +25,7 @@ router.post('/register', async (req, res, next)=>{
       //添加用户
       let regresult=await querysql('insert into user (username,password,nickname,headimg) values (?,?,?,?)',[username,password,nickname,headimg]);
       //查询添加后的用户信息
-      let userinfo=await querysql('select * from user where id=?',[regresult.insertId]);
+      let userinfo=await querysql('select id,username,nickname,headimg from user where id=?',[regresult.insertId]);
       //返回信息
       res.send({
         code: 201,
@@ -79,7 +79,6 @@ router.post('/login',async (req,res,next) => {
         let returnres={
           id: seres[0].id,
           username: seres[0].username,
-          password: seres[0].password,
           nickname: seres[0].nickname,
           headimg: seres[0].headimg,
           token:`Bearer ${token}`
@@ -107,7 +106,7 @@ router.get('/info',async (req, res, next)=>{
   let usid=req.auth.sinresult.id;//取出token中的用户ID
   try {
     //查询用户信息
-    let usinfo=await querysql('select * from user where id =?',[usid]);
+    let usinfo=await querysql('select id,username,nickname,headimg from user where id =?',[usid]);
     res.send({
       code:200,
       msg:'用户信息获取成功！',
