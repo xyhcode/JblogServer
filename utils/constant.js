@@ -5,5 +5,5 @@ module.exports={
     PRIVATE_KEY: 'xianxian',
     //token过期时间 一天
     EXPIRED:60*60*24,
-    IP:'127.0.0.1',
+    IP:'127.0.0.1',//IP地址
 }

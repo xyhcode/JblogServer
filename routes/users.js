@@ -135,4 +135,27 @@ router.post('/uploads',upload.single('headimg'),async (req, res, next)=>{
   })
 })
 
+/**
+ * 更新用户信息
+ */
+router.put('/updateuser',async (req, res, next)=>{
+  let usid=req.auth.sinresult.id;//取出token中的用户ID
+  //获取数据
+  let {nickname,headimg}=req.body;
+  try {
+    //更新数据
+    let result=await querysql('update user set nickname=?,headimg=? where id=?',[nickname,headimg,usid]);
+    //console.log(result);
+    //从新查询用户信息
+    let seresult=await querysql('select id,username,nickname,headimg from user where id=?',[usid]);
+    res.send({
+      code:200,
+      msg: '更新成功！',
+      data:seresult[0]
+    })
+  }catch (e) {
+    next(e)
+  }
+})
+
 module.exports = router;
