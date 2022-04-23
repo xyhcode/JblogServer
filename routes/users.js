@@ -71,8 +71,10 @@ router.post('/login',async (req,res,next) => {
           msg:'账号或密码不正确！'
         })
       }else{//存在
+        //取出用户的信息
+        let sinresult=seres[0];
         //生成token({存的变量},常量token秘钥,{过期时间})
-        let token=jwt.sign({seres},PRIVATE_KEY,{expiresIn:EXPIRED});
+        let token=jwt.sign({sinresult},PRIVATE_KEY,{expiresIn:EXPIRED});
         //保存返回的数据
         let returnres={
           id: seres[0].id,
@@ -93,6 +95,25 @@ router.post('/login',async (req,res,next) => {
   }catch (e) {
     console.log(e);
     //交给中间件
+    next(e);
+  }
+})
+
+/**
+ * 得到用户信息接口
+ */
+router.get('/info',async (req, res, next)=>{
+  //console.log(req.auth.sinresult);token中获取用户信息
+  let usid=req.auth.sinresult.id;//取出token中的用户ID
+  try {
+    //查询用户信息
+    let usinfo=await querysql('select * from user where id =?',[usid]);
+    res.send({
+      code:200,
+      data:usinfo[0]
+    });
+    //console.log(usinfo);
+  }catch (e) {
     next(e);
   }
 })
