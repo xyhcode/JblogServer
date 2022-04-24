@@ -23,9 +23,13 @@ Node.js+MySQL+Express
 - `package.json` 项目配置文件
 
 #### 安装教程
+
 #####  本地环境
+
 Node.js+MySQL
+
 #####  创建数据库
+
 数据库文件在：db->blogserver.sql
 
 数据库连接名：root 密码：root
@@ -34,4 +38,5 @@ Node.js+MySQL
 
 #####  启动项目
 安装依赖：npm install
+
 启动项目：npm start
