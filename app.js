@@ -6,7 +6,7 @@ var logger = require('morgan');
 const cors=require('cors');
 const {PRIVATE_KEY}=require('./utils/constant');
 
-var indexRouter = require('./routes/index');
+var articleRouter = require('./routes/article');
 var usersRouter = require('./routes/users');
 //导入JWT
 const {expressjwt: expressJWT} = require("express-jwt");
@@ -38,7 +38,7 @@ app.use(expressJWT({
   ]
 }))
 
-app.use('/', indexRouter);
+app.use('/api/article', articleRouter);
 app.use('/api/users', usersRouter);
 
 // catch 404 and forward to error handler

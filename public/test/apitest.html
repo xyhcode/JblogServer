@@ -15,6 +15,8 @@
 <button onclick="gx()">更新用户信息</button>
 <hr>
 <button onclick="login()">登入</button>
+<hr>
+<button onclick="addwz()">添加文章</button>
 </body>
 <script>
     axios.interceptors.response.use(function (res){
@@ -42,6 +44,14 @@ async function gx() {
     });
     console.log(res);
     console.log(res.data.nickname);
+}
+
+async function addwz() {
+    let res = await axios.post('http://localhost:3000/api/article/addarticle',{
+        title:'vue入门',
+        arcontext:'<h1>测试vue</h1>'
+    });
+    console.log(res);
 }
 </script>
 </html>
