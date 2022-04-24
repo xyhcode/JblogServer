@@ -27,7 +27,9 @@ Node.js+MySQL+Express
 Node.js+MySQL
 #####  创建数据库
 数据库文件在：db->blogserver.sql
+
 数据库连接名：root 密码：root
+
 可在db->config.js修改
 
 #####  启动项目
