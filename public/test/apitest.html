@@ -17,6 +17,8 @@
 <button onclick="login()">登入</button>
 <hr>
 <button onclick="addwz()">添加文章</button>
+<hr>
+<button onclick="getarticele()">获取文章信息</button>
 </body>
 <script>
     axios.interceptors.response.use(function (res){
@@ -51,6 +53,11 @@ async function addwz() {
         title:'vue入门',
         arcontext:'<h1>测试vue</h1>'
     });
+    console.log(res);
+}
+
+async function getarticele() {
+    let res = await axios.get('http://localhost:3000/api/article/' + 2);
     console.log(res);
 }
 </script>

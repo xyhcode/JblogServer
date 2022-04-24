@@ -33,5 +33,22 @@ router.post('/addarticle', async (req, res, next)=>{
 /**
  * 得到文章信息
  */
+router.get('/:id',async (req, res, next) => {
+  //获取文章ID
+  let artid = req.params.id;
+  //取出token中的用户ID
+  let usid = req.auth.sinresult.id;
+  try {
+    //查询文章的信息
+    let result = await querysql('select * from article where id =? and userid=?', [artid, usid]);
+    res.send({
+      code: 200,
+      msg:'获取成功！',
+      data: result[0]
+    })
+  } catch (e) {
+    next(e);
+  }
+})
 
 module.exports = router;
