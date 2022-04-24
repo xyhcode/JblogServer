@@ -19,6 +19,10 @@
 <button onclick="addwz()">添加文章</button>
 <hr>
 <button onclick="getarticele()">获取文章信息</button>
+<hr>
+<button onclick="getall()">获取所有的文章</button>
+<hr>
+<button onclick="delar()">删除文章</button>
 </body>
 <script>
     axios.interceptors.response.use(function (res){
@@ -60,5 +64,14 @@ async function getarticele() {
     let res = await axios.get('http://localhost:3000/api/article/' + 2);
     console.log(res);
 }
+
+async function getall() {
+    let res = await axios.get('http://localhost:3000/api/article/allarticle');
+    console.log(res);
+};
+    async function delar() {
+        let res = await axios.delete('http://localhost:3000/api/article/7');
+        console.log(res);
+    }
 </script>
 </html>

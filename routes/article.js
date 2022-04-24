@@ -52,7 +52,7 @@ router.get('/:id',async (req, res, next) => {
 });
 
 /**
- * 所有文章
+ * 我的文章
  */
 router.get('/',async (req, res,next) => {
   //取出token中的用户ID
@@ -71,6 +71,29 @@ router.get('/',async (req, res,next) => {
   }
 });
 
+/**
+ * 删除文章
+ */
+router.delete('/:id',async (req, res, next) => {
+  //获取文章ID
+  let artid = req.params.id;
+  //取出token中的用户ID
+  let usid = req.auth.sinresult.id;
+  try {
+    let result = await querysql('delete from article where id=? and userid=?', [artid, usid]);
+    console.log(result);
+    res.send({
+      code: 200,
+      msg: '删除成功！'
+    })
+  } catch (e) {
+    next(e);
+  }
+});
+
+/**
+ * 获取所有文章
+ */
 
 
 module.exports = router;
