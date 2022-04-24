@@ -31,11 +31,11 @@ router.post('/addarticle', async (req, res, next)=>{
 });
 
 /**
- * 得到文章信息
+ * 得到文章详情
  */
-router.get('/:id',async (req, res, next) => {
+router.get('/detail',async (req, res, next) => {
   //获取文章ID
-  let artid = req.params.id;
+  let artid = req.query.id;
   //取出token中的用户ID
   let usid = req.auth.sinresult.id;
   try {
@@ -83,7 +83,7 @@ router.delete('/:id',async (req, res, next) => {
     let result = await querysql('delete from article where id=? and userid=?', [artid, usid]);
     console.log(result);
     res.send({
-      code: 200,
+      code: 204,
       msg: '删除成功！'
     })
   } catch (e) {
@@ -94,6 +94,20 @@ router.delete('/:id',async (req, res, next) => {
 /**
  * 获取所有文章
  */
+router.get('/allartlist',async (req, res, next) => {
+  try {
+    let result = await querysql('select b.id,b.title,b.arcontext,a.nickname,a.headimg,b.createtime from user as a INNER JOIN article as b ON a.id=b.userid');
+    console.log(result);
+    res.send({
+      code:200,
+      msg: '获取成功！',
+      data:result
+    })
+  }catch (e) {
+    next(e);
+  }
+});
+
 
 
 module.exports = router;

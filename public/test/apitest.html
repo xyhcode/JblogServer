@@ -61,12 +61,16 @@ async function addwz() {
 }
 
 async function getarticele() {
-    let res = await axios.get('http://localhost:3000/api/article/' + 2);
+    let res = await axios.get('http://localhost:3000/api/article/detail',{
+        params:{
+            id:2
+        }
+    });
     console.log(res);
 }
 
 async function getall() {
-    let res = await axios.get('http://localhost:3000/api/article/allarticle');
+    let res = await axios.get('http://localhost:3000/api/article/allartlist');
     console.log(res);
 };
     async function delar() {
