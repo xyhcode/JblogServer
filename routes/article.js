@@ -10,11 +10,14 @@ router.post('/addarticle', async (req, res, next)=>{
   let {title,arcontext}=req.body;
   //取出token中的用户ID
   let usid=req.auth.sinresult.id;
+  //获取当前时间格式化
   let time=moment(new Date()).format('yyyy-MM-DD HH:mm:ss');
-  console.log(time);
+  //console.log(time);
   try{
+    //添加数据
     let result=await querysql('insert into article(title,arcontext,createtime,userid) values(?,?,?,?)',[title,arcontext,time,usid]);
     //console.log(result);
+    //通过添加后的ID查询文章内容
     let seall=await querysql('select * from article where id=?',[result.insertId]);
     //console.log(seall);
     res.send({
