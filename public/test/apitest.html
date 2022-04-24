@@ -23,6 +23,8 @@
 <button onclick="getall()">获取所有的文章</button>
 <hr>
 <button onclick="delar()">删除文章</button>
+<hr>
+<button onclick="upar()">修改文章</button>
 </body>
 <script>
     axios.interceptors.response.use(function (res){
@@ -77,5 +79,16 @@ async function getall() {
         let res = await axios.delete('http://localhost:3000/api/article/7');
         console.log(res);
     }
+
+    async function upar() {
+        let res = await axios.put('http://localhost:3000/api/article/editarticle',{
+            id:6,
+            title: 'react入门',
+            arcontext: '<h1>JXL</h1>'
+        });
+        console.log(res);
+    }
+
+
 </script>
 </html>

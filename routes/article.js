@@ -108,6 +108,24 @@ router.get('/allartlist',async (req, res, next) => {
   }
 });
 
-
-
+/**
+ * 更新博客
+ */
+router.put('/editarticle',async (req, res, next)=>{
+  //获取需改的内容
+  let {id,title,arcontext}=req.body;
+  //取出token中的用户ID
+  let usid = req.auth.sinresult.id;
+  try {
+    let result = await querysql('update article set title=?,arcontext=? where id=? and userid=?',[title,arcontext,id,usid]);
+    let sealinfo=await querysql('select * from article where id=? and userid=?',[id,usid]);
+    res.send({
+      code: 200,
+      msg: '更新成功！',
+      data:sealinfo[0]
+    })
+  }catch (e) {
+    next(e);
+  }
+});
 module.exports = router;

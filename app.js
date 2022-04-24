@@ -8,6 +8,7 @@ const {PRIVATE_KEY}=require('./utils/constant');
 
 var articleRouter = require('./routes/article');
 var usersRouter = require('./routes/users');
+var commentsRouter = require('./routes/comment');
 //导入JWT
 const {expressjwt: expressJWT} = require("express-jwt");
 
@@ -40,6 +41,7 @@ app.use(expressJWT({
 
 app.use('/api/article', articleRouter);
 app.use('/api/users', usersRouter);
+app.use('/api/comment',commentsRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
