@@ -49,6 +49,28 @@ router.get('/:id',async (req, res, next) => {
   } catch (e) {
     next(e);
   }
-})
+});
+
+/**
+ * 所有文章
+ */
+router.get('/',async (req, res,next) => {
+  //取出token中的用户ID
+  let usid = req.auth.sinresult.id;
+  //console.log(usid);
+  try {
+    let result=await querysql('select * from article where userid=? ',[usid]);
+    //console.log(result);
+    res.send({
+      code:200,
+      msg: '获取成功！',
+      data: result
+    })
+  }catch (e) {
+    next(e);
+  }
+});
+
+
 
 module.exports = router;
