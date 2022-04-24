@@ -40,3 +40,5 @@ Node.js+MySQL
 安装依赖：npm install
 
 启动项目：npm start
+
+登入：登入密码都是admin
